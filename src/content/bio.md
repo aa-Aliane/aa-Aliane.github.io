@@ -20,24 +20,11 @@ My work is driven by a commitment to staying at the forefront of AI:
 
 ## Expertise
 
-### 🧠 Natural Language Processing
+**Natural Language Processing.** My core work sits at the intersection of deep learning and Arabic language processing. I have designed and trained Transformer-based architectures — BERT, AraBERT — for sentiment classification and fake news detection in Arabic, a language whose morphological complexity and dialectal variation make it one of the harder targets in NLP. I have built encoder-decoder systems for Neural Machine Translation across Arabic, French, and English using OpenNMT and Fairseq, and implemented textual similarity pipelines with dense vector indexing via FAISS for information retrieval and deduplication at scale.
 
-- Designed and developed **text classification models for Arabic sentiment analysis** using Transformer architectures (BERT, AraBERT) via Hugging Face.
-- Built **fake news detection systems** combining semantic representation approaches with deep classification models.
-- Designed **encoder-decoder models for Neural Machine Translation** (Arabic ↔ French/English) using OpenNMT and Fairseq frameworks.
-- Implemented **textual similarity and deduplication systems** for information retrieval, with vector indexing via FAISS.
+**Scientific Activity.** Beyond model building, I have been involved in the broader research community as co-organizer of a competitive NLP challenge — handling task design, dataset preparation, and submission evaluation — and as co-supervisor of Master's and Bachelor's students working on AI and NLP topics.
 
-### 🔬 Scientific Activities
-
-- **Co-organizer of the NLP Challenge**: a competitive NLP challenge involving task design, dataset preparation, and submission evaluation.
-- **Co-supervision of theses**: supervised Master's and Bachelor's students on AI and NLP topics.
-
-### ⚙️ Engineering & Infrastructure
-
-- Developed **REST APIs** (Django REST Framework, FastAPI) and **reactive web interfaces** (React, TypeScript) to expose and visualize research results.
-- Set up and managed **Docker deployment environments** in production.
-- Administered and maintained a **dedicated GPU workstation** for deep learning model training.
-- Managed **SQL** (PostgreSQL, MySQL) and **NoSQL** (MongoDB) databases.
+**Engineering & Infrastructure.** I cover the full stack between a trained model and a working product. On the backend, I build REST APIs with FastAPI and Django REST Framework; on the frontend, reactive interfaces with React and TypeScript. I manage Docker-based deployment environments in production and have maintained a dedicated GPU workstation for deep learning training over several years. Database work spans both relational systems (PostgreSQL, MySQL) and document stores (MongoDB).
 
 ## Languages
 
