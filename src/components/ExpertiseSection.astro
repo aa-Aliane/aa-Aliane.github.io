@@ -1,0 +1,36 @@
+---
+interface ExpertiseItem {
+    label: string;
+    body: string;
+    tags: string[];
+}
+interface Props {
+    items: ExpertiseItem[];
+}
+const { items } = Astro.props;
+const allTags = items.flatMap(i => i.tags);
+---
+
+<section class="expertise-section">
+    <!-- Marquee strip -->
+    <div class="expertise-marquee" aria-hidden="true">
+        <div class="expertise-marquee-track">
+            {[...allTags, ...allTags].map(tag => (
+                <span class="expertise-marquee-item">{tag}</span>
+            ))}
+        </div>
+    </div>
+
+    <!-- Numbered blocks -->
+    <div class="expertise-blocks">
+        {items.map((item, i) => (
+            <div class="expertise-block">
+                <span class="expertise-num">0{i + 1}</span>
+                <div class="expertise-content">
+                    <h3 class="expertise-label">{item.label}</h3>
+                    <p class="expertise-body">{item.body}</p>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>

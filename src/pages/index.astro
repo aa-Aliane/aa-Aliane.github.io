@@ -1,13 +1,15 @@
 ---
-import { getEntry, render } from "astro:content";
+import { getEntry, render, getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ExpertiseSection from "../components/ExpertiseSection.astro"
 import { PAGES } from "../config";
 
-// Load bio content
 const bioEntry = await getEntry("bio", "bio");
 const { Content: BioContent } = bioEntry
-	? await render(bioEntry)
-	: { Content: null };
+    ? await render(bioEntry)
+    : { Content: null };
+
+const bio = bioEntry?.data;
 ---
 
 <BaseLayout title={PAGES.home.title}>
@@ -25,7 +27,11 @@ const { Content: BioContent } = bioEntry
 			)
 		}
 		<div class="prose">
-			{BioContent ? <BioContent /> : <p>Loading bio...</p>}
-		</div>
+            {BioContent ? <BioContent /> : <p>Loading bio...</p>}
+        </div>
+
+        {bio?.expertise && (
+            <ExpertiseSection items={bio.expertise} />
+        )}
 	</div>
 </BaseLayout>

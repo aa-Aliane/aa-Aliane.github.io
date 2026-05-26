@@ -1,8 +1,18 @@
 ---
 name: "Aliane Amine"
 avatar: "me.jpeg"
-shortBio: "Research Engineer in Natural Language Processing with full-stack and infrastructure expertise, specializing in low-resource languages."
+shortBio: "Research Engineer in NLP with full-stack and infrastructure expertise, specializing in low-resource languages."
 institution: "Besançon, France"
+expertise:
+  - label: "NLP Research"
+    body: "Arabic is one of the hardest languages to work on — morphologically rich, diglossic, severely under-resourced in its dialectal varieties. I build Transformer-based classifiers (BERT, AraBERT) for sentiment and misinformation detection, encoder-decoder architectures for Arabic–French and Arabic–English machine translation with OpenNMT and Fairseq, and dense vector search pipelines via FAISS for textual similarity at scale."
+    tags: ["BERT", "AraBERT", "OpenNMT", "Fairseq", "FAISS", "Hugging Face"]
+  - label: "Engineering"
+    body: "A model that stays in a notebook is a half-finished idea. I build the full chain — REST APIs with FastAPI and Django, reactive interfaces with React and TypeScript — to bring research results into usable products."
+    tags: ["FastAPI", "Django", "React", "TypeScript", "Python"]
+  - label: "Infrastructure"
+    body: "I've maintained a dedicated GPU workstation for deep learning training for years, managed Docker-based deployment environments in production, and worked across both relational and document databases depending on the shape of the data."
+    tags: ["Docker", "GPU", "PostgreSQL", "MySQL", "MongoDB"]
 ---
 
 I am a **Scientific Research Engineer** specializing in **Natural Language Processing (NLP)**. My profile is interdisciplinary, combining deep research capabilities with full-stack development and infrastructure management skills, allowing me to bridge the gap between research and production deployment.

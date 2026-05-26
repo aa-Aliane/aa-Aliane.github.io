@@ -1,0 +1,157 @@
+---
+// src/components/ui/TableOfContents.astro
+
+interface Heading {
+    depth: number;
+    slug: string;
+    text: string;
+}
+
+interface Props {
+    headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Only keep h2 and h3
+const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+    filtered.length > 0 && (
+        <nav class="toc" aria-label="Table of contents">
+            <p class="toc-title">On this page</p>
+            <ul class="toc-list">
+                {filtered.map((heading) => (
+                    <li class={`toc-item toc-depth-${heading.depth}`}>
+                        <a
+                            href={`#${heading.slug}`}
+                            class="toc-link"
+                            data-heading={heading.slug}
+                        >
+                            {heading.text}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+    )
+}
+
+<style>
+    .toc {
+        position: sticky;
+        top: 2rem;
+        /* width is controlled by the parent wrapper in BaseDetail */
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+        padding: 1.25rem 1rem 1.25rem 1.25rem;
+        border-left: 2px solid var(--border);
+        font-size: 0.8rem;
+        /* subtle scrollbar */
+        scrollbar-width: thin;
+        scrollbar-color: var(--border) transparent;
+    }
+
+    .toc-title {
+        font-weight: 700;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.5;
+        margin-bottom: 0.75rem;
+    }
+
+    .toc-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+    }
+
+    .toc-item {
+        line-height: 1.4;
+    }
+
+    .toc-depth-3 {
+        padding-left: 0.85rem;
+    }
+
+    .toc-link {
+        display: block;
+        padding: 0.25rem 0.4rem;
+        border-radius: 0.25rem;
+        color: var(--foreground);
+        opacity: 0.55;
+        text-decoration: none;
+        transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .toc-link:hover {
+        opacity: 0.9;
+        background: var(--surface);
+    }
+
+    .toc-link.active {
+        color: var(--accent);
+        opacity: 1;
+        font-weight: 600;
+    }
+</style>
+
+<script>
+    function initToc() {
+        const links = document.querySelectorAll<HTMLAnchorElement>(".toc-link[data-heading]");
+        if (!links.length) return;
+
+        const slugs = Array.from(links).map((l) => l.dataset.heading!);
+        const targets = slugs
+            .map((s) => document.getElementById(s))
+            .filter(Boolean) as HTMLElement[];
+
+        if (!targets.length) return;
+
+        // Mark a link as active
+        function setActive(slug: string) {
+            links.forEach((l) => {
+                l.classList.toggle("active", l.dataset.heading === slug);
+            });
+        }
+
+        // Use IntersectionObserver to track the heading in view
+        const observer = new IntersectionObserver(
+            (entries) => {
+                // Pick the topmost visible heading
+                const visible = entries
+                    .filter((e) => e.isIntersecting)
+                    .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+                if (visible.length > 0) {
+                    setActive(visible[0].target.id);
+                }
+            },
+            {
+                rootMargin: "0px 0px -70% 0px",
+                threshold: 0,
+            }
+        );
+
+        targets.forEach((t) => observer.observe(t));
+
+        // Highlight the first heading by default
+        if (targets[0]) setActive(targets[0].id);
+
+        // Cleanup on Astro page transitions
+        document.addEventListener("astro:before-swap", () => observer.disconnect(), {
+            once: true,
+        });
+    }
+
+    document.addEventListener("astro:page-load", initToc);
+    initToc(); // also run on first load
+</script>
